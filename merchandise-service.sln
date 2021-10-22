@@ -14,7 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{486077C9-A87
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{755392A4-CBD5-47B6-8AAD-AB3DA657C79C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "merchandise-service", "src\merchandise-service\merchandise-service.csproj", "{F74E612C-0320-4EAD-A254-0DFB3E4AF79C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchandiseService", "src\MerchandiseService\MerchandiseService.csproj", "{F74E612C-0320-4EAD-A254-0DFB3E4AF79C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{8C028550-CB54-40A2-9392-D616E0408559}"
+ProjectSection(SolutionItems) = preProject
+	docker-compose.yml = docker-compose.yml
+EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

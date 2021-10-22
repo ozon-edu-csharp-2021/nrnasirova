@@ -2,8 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
-        <RootNamespace>merchandise_service</RootNamespace>
+        <RootNamespace>MerchandiseService</RootNamespace>
         <Nullable>enable</Nullable>
+        <AssemblyName>MerchandiseService</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>

@@ -14,7 +14,7 @@ services:
     hostname: employee-service
   
   merchandise-service:
-    image: 'merchandise-service:main'
+    build: '.'
     hostname: merchandise-service
     ports:
     - "8080:80"
