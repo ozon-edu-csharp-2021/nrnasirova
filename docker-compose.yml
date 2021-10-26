@@ -14,7 +14,9 @@ services:
     hostname: employee-service
   
   merchandise-service:
-    build: '.'
+    build: 
+      context: ./dir
+      dockerfile: dockerfile
     hostname: merchandise-service
     ports:
     - "8080:80"
