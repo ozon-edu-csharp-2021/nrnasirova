@@ -15,7 +15,7 @@ services:
   
   merchandise-service:
     build: 
-      context: ./dir
+      context: .
       dockerfile: dockerfile
     hostname: merchandise-service
     ports:
