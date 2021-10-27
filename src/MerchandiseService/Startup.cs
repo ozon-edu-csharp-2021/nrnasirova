@@ -20,6 +20,9 @@ namespace MerchandiseService
         {
             app.UseRouting();
             app.UseEndpoints(endpoints => { });
+            app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
+            app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
+            app.Map("/live", builder => builder.UseMiddleware<VersionMiddleware>());
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
         }
     }
