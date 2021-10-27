@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace MerchandiseService.Infrastructure.Middlewares
@@ -9,7 +10,7 @@ namespace MerchandiseService.Infrastructure.Middlewares
         {
         }
 
-        public void InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
         }

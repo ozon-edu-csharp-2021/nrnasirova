@@ -11,7 +11,7 @@ namespace MerchandiseService.Infrastructure.Middlewares
         {
         }
 
-        public void InvokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
         }
