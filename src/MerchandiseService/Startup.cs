@@ -18,8 +18,6 @@ namespace MerchandiseService
         {
             services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
-            services.AddSingleton<IStartupFilter, SwaggerStartupFilter>();
-            services.AddSingleton<IStartupFilter, TerminalStartupFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
