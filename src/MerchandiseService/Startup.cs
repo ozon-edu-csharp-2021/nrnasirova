@@ -1,6 +1,7 @@
 using MerchandiseService.Infrastructure.Filters;
 using MerchandiseService.Infrastructure.Interceptors;
 using MerchandiseService.Infrastructure.Middlewares;
+using MerchandiseService.Infrastructure.StartupFilters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,8 @@ namespace MerchandiseService
         {
             services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
+            services.AddSingleton<IStartupFilter, SwaggerStartupFilter>();
+            services.AddSingleton<IStartupFilter, TerminalStartupFilter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -24,11 +27,6 @@ namespace MerchandiseService
         {
             app.UseRouting();
             app.UseEndpoints(endpoints => { });
-            app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
-            app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
-            app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
-            app.UseMiddleware<RequestLoggingMiddleware>();
-            app.UseMiddleware<ResponseLoggingMiddleware>();
         }
     }
 }
