@@ -1,4 +1,5 @@
 using MerchandiseService.Infrastructure.Filters;
+using MerchandiseService.Infrastructure.Interceptors;
 using MerchandiseService.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ namespace MerchandiseService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
+            services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
