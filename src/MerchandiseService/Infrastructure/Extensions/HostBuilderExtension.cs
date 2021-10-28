@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using MerchandiseService.Infrastructure.Filters;
 using MerchandiseService.Infrastructure.Interceptors;
 using MerchandiseService.Infrastructure.StartupFilters;
 using Microsoft.AspNetCore.Hosting;
@@ -27,5 +28,17 @@ namespace MerchandiseService.Infrastructure.Extensions
             });
             return builder;
         }
+        
+        public static IHostBuilder AddHttp(this IHostBuilder builder)
+        {
+            builder.ConfigureServices(services =>
+            {
+                services.AddControllers(options => options.Filters.Add<GlobalExceptionFilter>());
+            });
+            
+            return builder;
+        }
     }
+    
+    
 }
