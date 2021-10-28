@@ -7,7 +7,7 @@ namespace MerchandiseService.Services.Interfaces
 {
     public interface IMerchService
     {
-        Task IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token);
-        Task<List<MerchItem>> GetMerchByEmployeeId(long employeeId, CancellationToken token);
+        Task<BaseResponse<object>> IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token);
+        Task<BaseResponse<List<MerchItem>>> GetMerchByEmployeeId(long employeeId, CancellationToken token);
     }
 }

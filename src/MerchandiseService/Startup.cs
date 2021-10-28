@@ -1,3 +1,4 @@
+using MerchandiseService.GrpcServices;
 using MerchandiseService.Infrastructure.Filters;
 using MerchandiseService.Infrastructure.Interceptors;
 using MerchandiseService.Infrastructure.Middlewares;
@@ -28,6 +29,7 @@ namespace MerchandiseService
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<MerchGrpcService>();
                 endpoints.MapControllers();
             });
         }
