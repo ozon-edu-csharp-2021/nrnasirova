@@ -19,19 +19,22 @@ namespace MerchandiseService.HttpClients
             _httpClient = client;
         }
 
-        public async Task<HttpStatusCode> V1IssueMerch(MerchIssueRequest merchItemIssueModel, CancellationToken token)
+        public async Task<BaseResponse<object>> V1IssueMerch(MerchIssueRequest merchItemIssueModel, CancellationToken token)
         {
             var merchItemIssueModelToJson = JsonSerializer.Serialize(merchItemIssueModel);
             var httpContent = new StringContent(merchItemIssueModelToJson, Encoding.UTF8);
+            
             using var response = await _httpClient.PostAsync("v1/api/merch", httpContent, token);
-            return response.StatusCode;
+            var bodyAsString = await response.Content.ReadAsStringAsync(token);
+            var issueMerchResponse = JsonSerializer.Deserialize<BaseResponse<object>>(bodyAsString);
+            return issueMerchResponse;
         }
 
-        public async Task<List<MerchItemResponse>> V1GetByEmployeeId(long employeeId, CancellationToken token)
+        public async Task<BaseResponse<List<MerchItemResponse>>> V1GetByEmployeeId(long employeeId, CancellationToken token)
         {
             using var response = await _httpClient.GetAsync($"v1/api/merch?employeeId={employeeId}", token);
-            var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<List<MerchItemResponse>>(body);
+            var bodyAsString = await response.Content.ReadAsStringAsync(token);
+            return JsonSerializer.Deserialize<BaseResponse<List<MerchItemResponse>>>(bodyAsString);
         }
     }
 }
