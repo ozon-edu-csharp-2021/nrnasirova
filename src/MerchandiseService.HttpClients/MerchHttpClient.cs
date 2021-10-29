@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Grpc.Core;
 using MerchandiseService.HttpModels;
 
 namespace MerchandiseService.HttpClients

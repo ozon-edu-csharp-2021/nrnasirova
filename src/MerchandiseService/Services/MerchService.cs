@@ -23,7 +23,7 @@ namespace MerchandiseService.Services
                 new (12345, "test", 1)
             };
 
-            response.Code = (int) Status.Approved;
+            response.Code = Status.Approved;
             response.Message = Status.Approved.ToString();
             response.Payload = merchItems;
             return Task.FromResult(response);

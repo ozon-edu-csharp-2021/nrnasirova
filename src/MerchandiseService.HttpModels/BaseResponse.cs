@@ -2,7 +2,7 @@
 {
     public class BaseResponse<T>
     {
-        public int Code { get; set; }
+        public Status Code { get; set; }
         public T Payload { get; set; }
         public string Message { get; set; }
     }
