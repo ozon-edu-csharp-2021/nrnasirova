@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchandiseService.HttpClie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchandiseService.Grpc", "src\MerchandiseService.Grpc\MerchandiseService.Grpc.csproj", "{F6B01BCE-9C4F-4FBD-8E11-86D7E620388D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchandiseService.Infrastructure", "src\MerchandiseService.Infrastructure\MerchandiseService.Infrastructure.csproj", "{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,7 @@ Global
 		{09569557-052F-42D8-896A-E14BB81B7D16} = {486077C9-A87B-4605-8886-07D07B42974A}
 		{5D8F626E-D283-4FE3-880A-BB06DEF576CE} = {486077C9-A87B-4605-8886-07D07B42974A}
 		{F6B01BCE-9C4F-4FBD-8E11-86D7E620388D} = {486077C9-A87B-4605-8886-07D07B42974A}
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47} = {486077C9-A87B-4605-8886-07D07B42974A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F74E612C-0320-4EAD-A254-0DFB3E4AF79C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -94,5 +97,17 @@ Global
 		{F6B01BCE-9C4F-4FBD-8E11-86D7E620388D}.Release|x64.Build.0 = Release|Any CPU
 		{F6B01BCE-9C4F-4FBD-8E11-86D7E620388D}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6B01BCE-9C4F-4FBD-8E11-86D7E620388D}.Release|x86.Build.0 = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|x64.Build.0 = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Debug|x86.Build.0 = Debug|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|x64.ActiveCfg = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|x64.Build.0 = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|x86.ActiveCfg = Release|Any CPU
+		{58CEE6A8-AE75-49E8-8682-9AB5D642BA47}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,5 @@
+using Infrastructure.Interceptors;
 using MerchandiseService.GrpcServices;
-using MerchandiseService.Infrastructure.Filters;
-using MerchandiseService.Infrastructure.Interceptors;
 using MerchandiseService.Infrastructure.Middlewares;
 using MerchandiseService.Infrastructure.StartupFilters;
 using MerchandiseService.Services;

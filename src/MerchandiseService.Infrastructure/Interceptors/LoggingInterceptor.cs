@@ -4,7 +4,7 @@ using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
 
-namespace MerchandiseService.Infrastructure.Interceptors
+namespace Infrastructure.Interceptors
 {
     public class LoggingInterceptor: Interceptor
     {

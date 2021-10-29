@@ -1,4 +1,4 @@
-using MerchandiseService.Infrastructure.Extensions;
+using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 

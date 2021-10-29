@@ -1,4 +1,5 @@
 ﻿using System;
+using Infrastructure.Middlewares;
 using MerchandiseService.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

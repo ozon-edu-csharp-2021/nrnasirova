@@ -11,12 +11,17 @@
         <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
         <ProjectReference Include="..\MerchandiseService.Grpc\MerchandiseService.Grpc.csproj" />
+        <ProjectReference Include="..\MerchandiseService.Infrastructure\MerchandiseService.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Update="appsettings.Development.json">
         <DependentUpon>appsettings.json</DependentUpon>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Infrastructure" />
     </ItemGroup>
 
 </Project>
