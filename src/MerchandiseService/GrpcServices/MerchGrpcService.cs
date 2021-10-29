@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using MerchandiseService.Grpc;
 using MerchandiseService.Models;
@@ -16,17 +17,16 @@ namespace MerchandiseService.GrpcServices
         {
             _merchService = merchService;
         }
-        public override async Task<IssueMerchResponse> IssueMerch(IssueMerchRequest request, ServerCallContext context)
+
+        public override async Task<Empty> IssueMerch(IssueMerchRequest request, ServerCallContext context)
         {
-            var response = await _merchService.IssueMerch(new MerchItemIssueModel()
+            await _merchService.IssueMerch(new MerchItemIssueModel()
             {
                 EmployeeId = request.EmployeeId,
                 MerchId = request.MerchId,
                 Quantity = request.Quantity
             }, new CancellationToken());
-
-            return new IssueMerchResponse();
-
+            return new Empty(); 
         }
 
         public override async Task<GetMerchByEmployeeIdResponse> GetByEmployeeId(GetMerchByEmployeeIdRequest request, ServerCallContext context)
