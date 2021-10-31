@@ -1,10 +1,9 @@
 ﻿using System;
 using Infrastructure.Middlewares;
-using MerchandiseService.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace MerchandiseService.Infrastructure.StartupFilters
+namespace Infrastructure.StartupFilters
 {
     public class TerminalStartupFilter : IStartupFilter
     {
@@ -15,8 +14,7 @@ namespace MerchandiseService.Infrastructure.StartupFilters
                 app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
                 app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
                 app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
-                app.UseMiddleware<RequestLoggingMiddleware>();
-                app.UseMiddleware<ResponseLoggingMiddleware>();
+                app.UseMiddleware<RequestResponseLoggingMiddleware>();
                 next(app);
             };
         }

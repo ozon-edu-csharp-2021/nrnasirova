@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using MerchandiseService.Models;
 using MerchandiseService.Services.Interfaces;
@@ -17,7 +18,7 @@ namespace MerchandiseService.Controllers.V1
             _merchService = merchService;
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token)
         {
             await _merchService.IssueMerch(merchItemIssueModel, token);

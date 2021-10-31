@@ -1,6 +1,6 @@
 ﻿namespace MerchandiseService.HttpModels
 {
-    public class MerchItemResponse
+    public class MerchItem
     {
         public long MerchId { get; }
         

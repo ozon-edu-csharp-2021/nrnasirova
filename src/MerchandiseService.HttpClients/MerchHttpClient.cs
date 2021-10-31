@@ -29,11 +29,11 @@ namespace MerchandiseService.HttpClients
             return issueMerchResponse;
         }
 
-        public async Task<BaseResponse<List<MerchItemResponse>>> V1GetByEmployeeId(long employeeId, CancellationToken token)
+        public async Task<BaseResponse<List<MerchItem>>> V1GetByEmployeeId(long employeeId, CancellationToken token)
         {
             using var response = await _httpClient.GetAsync($"v1/api/merch?employeeId={employeeId}", token);
             var bodyAsString = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<BaseResponse<List<MerchItemResponse>>>(bodyAsString);
+            return JsonSerializer.Deserialize<BaseResponse<List<MerchItem>>>(bodyAsString);
         }
     }
 }

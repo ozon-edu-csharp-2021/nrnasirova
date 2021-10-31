@@ -10,9 +10,8 @@ service MerchandiseService {
 }
 
 message IssueMerchRequest { 
-  int64 MerchId = 1;
-  int32 Quantity = 2;
-  int64 EmployeeId = 3;
+  repeated Merch MerchItems = 1;
+  int64 EmployeeId = 2;
 }
 
 message GetMerchByEmployeeIdRequest {

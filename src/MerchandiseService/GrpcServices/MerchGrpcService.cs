@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
@@ -20,12 +21,12 @@ namespace MerchandiseService.GrpcServices
 
         public override async Task<Empty> IssueMerch(IssueMerchRequest request, ServerCallContext context)
         {
-            await _merchService.IssueMerch(new MerchItemIssueModel()
-            {
-                EmployeeId = request.EmployeeId,
-                MerchId = request.MerchId,
-                Quantity = request.Quantity
-            }, new CancellationToken());
+            await _merchService.IssueMerch(
+                new MerchItemIssueModel
+                {
+                    EmployeeId = request.EmployeeId,
+                    MerchItems = request.MerchItems.Select(x => new MerchItem(x.MerchId, x.MerchName, x.Quantity)).ToList()
+                }, new CancellationToken());
             return new Empty(); 
         }
 

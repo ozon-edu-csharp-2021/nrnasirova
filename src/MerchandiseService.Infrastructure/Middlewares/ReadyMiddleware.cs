@@ -1,9 +1,8 @@
 ﻿using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace MerchandiseService.Infrastructure.Middlewares
+namespace Infrastructure.Middlewares
 {
     public class ReadyMiddleware
     {

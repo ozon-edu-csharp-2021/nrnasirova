@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using MerchandiseService.Models;
@@ -12,7 +13,7 @@ namespace MerchandiseService.Services
 
         public Task<BaseResponse<object>> IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(new BaseResponse<object>());
         }
 
         public Task<BaseResponse<List<MerchItem>>> GetMerchByEmployeeId(long employeeId, CancellationToken token)

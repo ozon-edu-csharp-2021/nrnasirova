@@ -1,7 +1,5 @@
 using Infrastructure.Interceptors;
 using MerchandiseService.GrpcServices;
-using MerchandiseService.Infrastructure.Middlewares;
-using MerchandiseService.Infrastructure.StartupFilters;
 using MerchandiseService.Services;
 using MerchandiseService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;

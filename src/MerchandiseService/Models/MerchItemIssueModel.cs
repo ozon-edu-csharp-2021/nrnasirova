@@ -1,9 +1,10 @@
-﻿namespace MerchandiseService.Models
+﻿using System.Collections.Generic;
+
+namespace MerchandiseService.Models
 {
     public class MerchItemIssueModel
     {
-        public long MerchId { get; set; }
-        public int Quantity { get; set; }
+        public List<MerchItem>? MerchItems { get; set; }
         public long EmployeeId { get; set; }
     }
 }
