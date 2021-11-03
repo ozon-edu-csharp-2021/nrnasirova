@@ -1,5 +1,5 @@
 syntax = "proto3";
-option csharp_namespace = "MerchandiseService.Grpc";
+option csharp_namespace = "MerchandiseService.Grpc.V1";
 package MerchandiseService;
 
 import "google/protobuf/empty.proto";

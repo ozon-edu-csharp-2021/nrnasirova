@@ -4,8 +4,8 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Grpc.Core;
-using MerchandiseService.HttpModels;
+using MerchandiseService.HttpModels.V1.Request;
+using V1MerchItem = MerchandiseService.HttpModels.V1.Response.V1MerchItem;
 
 namespace MerchandiseService.HttpClients
 {
@@ -18,22 +18,22 @@ namespace MerchandiseService.HttpClients
             _httpClient = client;
         }
 
-        public async Task<BaseResponse<object>> V1IssueMerch(MerchIssueRequest merchItemIssueModel, CancellationToken token)
+        public async Task V1IssueMerch(V1MerchIssue merchItemIssueModel, CancellationToken token)
         {
             var merchItemIssueModelToJson = JsonSerializer.Serialize(merchItemIssueModel);
-            var httpContent = new StringContent(merchItemIssueModelToJson, Encoding.UTF8);
+            var httpContent = new StringContent(merchItemIssueModelToJson, Encoding.UTF8); 
             
-            using var response = await _httpClient.PostAsync("v1/api/merch", httpContent, token);
-            var bodyAsString = await response.Content.ReadAsStringAsync(token);
-            var issueMerchResponse = JsonSerializer.Deserialize<BaseResponse<object>>(bodyAsString);
-            return issueMerchResponse;
+            await _httpClient.PostAsync("v1/api/merch", httpContent, token);
         }
 
-        public async Task<BaseResponse<List<MerchItem>>> V1GetByEmployeeId(long employeeId, CancellationToken token)
+        public async Task <List<V1MerchItem>> V1GetByEmployeeId(V1MerchByEmployeeId merchByEmployeeId, CancellationToken token)
         {
-            using var response = await _httpClient.GetAsync($"v1/api/merch?employeeId={employeeId}", token);
+            var merchByEmployeeIdToJson = JsonSerializer.Serialize(merchByEmployeeId);
+            var httpContent = new StringContent(merchByEmployeeIdToJson, Encoding.UTF8); 
+
+            using var response = await _httpClient.PostAsync($"v1/api/merch", httpContent, token);
             var bodyAsString = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<BaseResponse<List<MerchItem>>>(bodyAsString);
+            return JsonSerializer.Deserialize<List<V1MerchItem>>(bodyAsString);
         }
     }
 }

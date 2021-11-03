@@ -1,33 +1,29 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using MerchandiseService.Models;
+using MerchandiseService.Models.V1.Request;
 using MerchandiseService.Services.Interfaces;
-using StatusCode = Grpc.Core.StatusCode;
+using V1MerchItem = MerchandiseService.Models.V1.Response.V1MerchItem;
 
 namespace MerchandiseService.Services
 {
     public class MerchService: IMerchService
     {
 
-        public Task<BaseResponse<object>> IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token)
+        public Task IssueMerch(Models.V1.Request.V1MerchItemIssueModel merchItemIssueModel, CancellationToken token)
         {
-            return Task.FromResult(new BaseResponse<object>());
+            throw new NotImplementedException();
         }
 
-        public Task<BaseResponse<List<MerchItem>>> GetMerchByEmployeeId(long employeeId, CancellationToken token)
+        public Task<List<V1MerchItem>> GetMerchByEmployeeId(V1MerchByEmployeeId merchByEmployeeId, CancellationToken token)
         {
-            var response = new BaseResponse<List<MerchItem>>();
-            var merchItems = new List<MerchItem>()
+            var merchItems = new List<V1MerchItem>()
             {
                 new (12345, "test", 1)
             };
-
-            response.Code = Status.Approved;
-            response.Message = Status.Approved.ToString();
-            response.Payload = merchItems;
-            return Task.FromResult(response);
+            
+            return Task.FromResult(merchItems);
         }
     }
 }

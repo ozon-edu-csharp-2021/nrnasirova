@@ -1,8 +1,8 @@
-﻿namespace MerchandiseService.Models
+﻿namespace MerchandiseService.Models.V1.Response
 {
-    public class MerchItem
+    public class V1MerchItem
     {
-        public MerchItem(long merchId, string merchName, int quantity)
+        public V1MerchItem(long merchId, string merchName, int quantity)
         {
             MerchName = merchName;
             Quantity = quantity;

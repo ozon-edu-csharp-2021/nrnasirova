@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
-using MerchandiseService.Models;
+using MerchandiseService.Models.V1.Request;
 using MerchandiseService.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,16 +18,16 @@ namespace MerchandiseService.Controllers.V1
         }
 
         [HttpPost]
-        public async Task<IActionResult> IssueMerch(MerchItemIssueModel merchItemIssueModel, CancellationToken token)
+        public async Task<IActionResult> IssueMerch(V1MerchItemIssueModel merchItemIssueModel, CancellationToken token)
         {
             await _merchService.IssueMerch(merchItemIssueModel, token);
             return Ok();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetByEmployeeId(long employeeId, CancellationToken token)
+        [HttpPost("getByEmployeeId")]
+        public async Task<IActionResult> GetByEmployeeId(V1MerchByEmployeeId merchByEmployeeId, CancellationToken token)
         {
-            var merchItems = await _merchService.GetMerchByEmployeeId(employeeId, token);
+            var merchItems = await _merchService.GetMerchByEmployeeId(merchByEmployeeId, token);
             return Ok(merchItems);
         }
     }

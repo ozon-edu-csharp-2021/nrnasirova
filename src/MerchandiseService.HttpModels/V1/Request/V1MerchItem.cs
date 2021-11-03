@@ -1,6 +1,6 @@
-﻿namespace MerchandiseService.HttpModels
+﻿namespace MerchandiseService.HttpModels.V1.Request
 {
-    public class MerchItem
+    public class V1MerchItem
     {
         public long MerchId { get; }
         

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +13,8 @@ namespace Infrastructure.StartupFilters
             return app =>
             {
                 app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
-                app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
-                app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
-                app.UseMiddleware<RequestResponseLoggingMiddleware>();
+                app.UseMiddleware<ResponseLoggingMiddleware>();
+                app.UseMiddleware<RequestLoggingMiddleware>();
                 next(app);
             };
         }
