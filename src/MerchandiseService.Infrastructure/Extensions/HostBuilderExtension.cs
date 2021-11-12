@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Filters;
+using Infrastructure.Handlers.MerchRequestAggregate;
 using Infrastructure.Interceptors;
 using Infrastructure.StartupFilters;
+using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

@@ -19,11 +19,19 @@ message GetMerchByEmployeeIdRequest {
 }
 
 message GetMerchByEmployeeIdResponse {
-  repeated Merch MerchItems = 1;
+  Employee employee = 1;
+  repeated Merch MerchItems = 2;
+  int32 Status = 3;
+  int32 MerchPackType = 4;
 }
 
 message Merch {
   int64 MerchId = 1;
   string MerchName = 2;
   int32 Quantity = 3;
+}
+
+message Employee {
+  int64 EmployeeId = 1;
+  string EmployeeEmail = 2;
 }

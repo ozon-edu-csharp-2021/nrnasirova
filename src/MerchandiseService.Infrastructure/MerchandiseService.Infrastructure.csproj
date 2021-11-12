@@ -8,10 +8,16 @@
     <ItemGroup>
       <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
       <PackageReference Include="Grpc.Core" Version="2.41.1" />
+      <PackageReference Include="MediatR" Version="9.0.0" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
       <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.2.3" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.2.3" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.2.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MerchandiseService.Domain\MerchandiseService.Domain.csproj" />
     </ItemGroup>
 
 </Project>

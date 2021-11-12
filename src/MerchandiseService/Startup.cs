@@ -1,7 +1,6 @@
+using Infrastructure.Extensions;
 using Infrastructure.Interceptors;
 using MerchandiseService.GrpcServices;
-using MerchandiseService.Services;
-using MerchandiseService.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +16,8 @@ namespace MerchandiseService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc(options => options.Interceptors.Add<LoggingInterceptor>());
-            services.AddSingleton<IMerchService, MerchService>();
+            services.AddInfrastructureServices();
+            services.AddInfrastructureRepositories();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
