@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using MerchandiseService.Domain.Exceptions;
 using MerchandiseService.Domain.Models;
 
 namespace MerchandiseService.Domain.AggregationModels.MerchRequestAggregate
@@ -9,21 +12,18 @@ namespace MerchandiseService.Domain.AggregationModels.MerchRequestAggregate
         {
             
         }
-        public Employee(Identifier externalId, Email email)
+        public Employee(Email email)
         {
-            ExternalId = externalId;
             Email = email;
         }
         /// <summary>
         /// external id - id from external service (employee service)
         /// </summary>
-        public Identifier ExternalId { get; }
         public Email Email { get; }
         
-
+        
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            yield return ExternalId;
             yield return Email;
         }
     }

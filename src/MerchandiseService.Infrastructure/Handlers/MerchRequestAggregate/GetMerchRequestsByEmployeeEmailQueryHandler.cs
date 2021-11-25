@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Infrastructure.Queries.MerchRequestAggregate;
@@ -8,7 +8,7 @@ using MerchandiseService.Domain.AggregationModels.MerchRequestAggregate.Reposito
 
 namespace Infrastructure.Handlers.MerchRequestAggregate
 {
-    public class GetMerchRequestsByEmployeeIdQueryHandler : IRequestHandler<GetMerchRequestByEmployeeIdQuery, MerchByEmployeeIdResponse>
+    public class GetMerchRequestsByEmployeeIdQueryHandler : IRequestHandler<GetMerchRequestByEmployeeEmailQuery, MerchByEmployeeIdResponse>
     {
         private readonly IMerchRequestRepository _merchRequestRepository;
 
@@ -18,12 +18,12 @@ namespace Infrastructure.Handlers.MerchRequestAggregate
         }
 
 
-        public async Task<MerchByEmployeeIdResponse> Handle(GetMerchRequestByEmployeeIdQuery request, CancellationToken cancellationToken)
+        public async Task<MerchByEmployeeIdResponse> Handle(GetMerchRequestByEmployeeEmailQuery request, CancellationToken cancellationToken)
         {
-            var merchItems = await _merchRequestRepository.FindByEmployeeExternalIdAsync(new Identifier(request.EmployeeExternalId), cancellationToken);
+            var merchItems = await _merchRequestRepository.FindByEmployeeEmailAsync(new Email(request.EmployeeEmail), cancellationToken);
 
             var merchByEmployeeIdResp = new MerchByEmployeeIdResponse
-                {SkuList = merchItems.Select(m => m.Sku.Value).ToList()};
+                {MerchPackType = 1, Status = 3, CreatedAt = DateTimeOffset.Now, EmployeeEmail = "test@gmail.com"};
 
             return merchByEmployeeIdResp;
         }

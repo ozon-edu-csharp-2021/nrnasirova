@@ -8,10 +8,11 @@ namespace MerchandiseService.Domain.AggregationModels.MerchRequestAggregate.Repo
     public interface IMerchRequestRepository : IRepository<MerchRequest>
     {
         /// <summary>
-        /// Finds merch request by employee external id
+        /// Finds merch request by employee email
         /// </summary>
-        /// <param name="externalId"></param>
-        /// <returns>Merch request</returns>
-        Task<List<MerchItem>> FindByEmployeeExternalIdAsync(Identifier identifier, CancellationToken cancellationToken = default);
+        /// <param name="email">Employee email</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<List<MerchRequest>> FindByEmployeeEmailAsync(Email email, CancellationToken cancellationToken = default);
     }
 }

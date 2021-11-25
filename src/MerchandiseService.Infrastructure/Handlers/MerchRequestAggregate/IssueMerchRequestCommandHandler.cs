@@ -1,11 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Infrastructure.Commands.IssueMerchRequest;
 using MediatR;
 using MerchandiseService.Domain.AggregationModels.MerchRequestAggregate;
 using MerchandiseService.Domain.AggregationModels.MerchRequestAggregate.Repository;
-using MerchandiseService.Domain.AggregationModels.ValueObjects;
 using MerchandiseService.Domain.Models;
 
 namespace Infrastructure.Handlers.MerchRequestAggregate
@@ -21,22 +21,23 @@ namespace Infrastructure.Handlers.MerchRequestAggregate
         
         public async Task<int> Handle(IssueMerchRequestCommand request, CancellationToken cancellationToken)
         {
-            var merchItems = request.SkuList.Select(sku => new MerchItem(new Sku(sku))).ToList();
-            var merchPackType = Enumeration.GetAll<MerchPackType>().FirstOrDefault(m => m.Id.Equals(request.MerchPackType)) ?? MerchPackType.NoMerchPack;
+            var merchPackType = Enumeration.GetAll<MerchPackType>()
+                .FirstOrDefault(m => m.Id.Equals(request.MerchPackType));
 
-            if (!Equals(merchPackType, MerchPackType.NoMerchPack))
-            {
-                merchItems.AddRange(MerchPackToSku.MerchPackToSkuDictionary[merchPackType]);
-            }
+            var existingMerchRequests = await _merchRequestRepository.FindByEmployeeEmailAsync(new Email(request.EmployeeEmail), cancellationToken);
+            
+            var merchRequest = MerchRequest.Create(new Employee(new Email(request.EmployeeEmail)), merchPackType, DateTimeOffset.Now, existingMerchRequests);
 
-            var merchRequest =
-                new MerchRequest(
-                    new Employee(new Identifier(request.EmployeeExternalId), new Email(request.EmployeeEmail)), merchItems, merchPackType);
             var issueMerchResult = await _merchRequestRepository.CreateAsync(merchRequest, cancellationToken);
-
+            
             // await _merchRequestRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             
-            return issueMerchResult.Id;
+            //go to stock api and check if merchpack is available
+            merchRequest.GiveOut(DateTimeOffset.Now);
+            
+            await _merchRequestRepository.UpdateAsync(merchRequest, cancellationToken);
+            
+            return 1;
         }
     }
 }

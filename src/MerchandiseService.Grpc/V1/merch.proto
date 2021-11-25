@@ -6,32 +6,30 @@ import "google/protobuf/empty.proto";
 
 service MerchandiseService {
   rpc IssueMerch(IssueMerchRequest) returns(google.protobuf.Empty);
-  rpc GetByEmployeeId(GetMerchByEmployeeIdRequest) returns(GetMerchByEmployeeIdResponse); 
+  rpc GetByEmployeeEmail(GetMerchByEmployeeEmail) returns(GetMerchByEmployeeEmailResponse); 
 }
 
 message IssueMerchRequest { 
-  repeated Merch MerchItems = 1;
+  int32 MerchPackType = 1;
   int64 EmployeeId = 2;
 }
 
-message GetMerchByEmployeeIdRequest {
-  int64 EmployeeId = 1;
+message GetMerchByEmployeeEmail {
+  string EmployeeEmail = 1;
 }
 
-message GetMerchByEmployeeIdResponse {
-  Employee employee = 1;
-  repeated Merch MerchItems = 2;
-  int32 Status = 3;
-  int32 MerchPackType = 4;
-}
-
-message Merch {
-  int64 MerchId = 1;
-  string MerchName = 2;
-  int32 Quantity = 3;
+message GetMerchByEmployeeEmailResponse {
+  repeated MerchRequest MerchRequests = 1;
 }
 
 message Employee {
-  int64 EmployeeId = 1;
   string EmployeeEmail = 2;
+}
+
+message MerchRequest {
+  Employee employee = 1;
+  int32 Status = 2;
+  int32 MerchPackType = 3;
+  string CreatedAt = 4;
+  string GivenOutAt = 5;
 }

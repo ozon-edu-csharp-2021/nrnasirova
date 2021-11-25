@@ -5,12 +5,8 @@ namespace MerchandiseService.Domain.AggregationModels.MerchRequestAggregate
 {
     public class Identifier : ValueObject
     {
-        public long Value { get; }
-
-        public Identifier(long externalIdValue)
-        {
-            Value = externalIdValue;
-        }
+        public int Value { get; }
+        
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Value;

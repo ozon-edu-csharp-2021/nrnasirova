@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MerchandiseService.Domain.AggregationModels.MerchRequestAggregate;
 using MerchandiseService.Domain.Exceptions;
@@ -8,101 +9,46 @@ namespace MerchandiseService.Domain.Tests
     public class MerchRequestTests
     {
         [Fact]
-        public void CanSetStatusFromNewToProcessing()
+        public void CreateMerchRequestReturnsMerchRequestCreated()
         {
             //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(1), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
+            var email = "test@gmail.com";
             
             //Act
-            merchRequest.SetStatus(Status.Processing);
+            var merchRequest = MerchRequest.Create(new Employee(new Email(email)), MerchPackType.StarterPack,
+                DateTimeOffset.Now);
             
             //Assert
-            Assert.Equal(Status.Processing, merchRequest.Status);
+            Assert.Equal(merchRequest.Employee.Email,new Email(email));
+            Assert.Equal(merchRequest.MerchPackType, MerchPackType.StarterPack);
+            Assert.Equal(merchRequest.Status, Status.New);
         }
         
         [Fact]
-        public void CanNotSetStatusFromNew()
+        public void CreateMerchRequestReturnsException()
         {
             //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(2), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
+            var email = "test";
             
             //Act
-            
+
             //Assert
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.Denied));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.GivenOut));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.WaitingSupply));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.ReadyToGiveOut));
+            Assert.Throws<InvalidEmployeeInfromationException>( () => MerchRequest.Create(new Employee(new Email(email)), MerchPackType.StarterPack,
+                DateTimeOffset.Now));
         }
         
         [Fact]
-        public void CanNotSetStatusFromNewToWaitingSupplyOrDeniedOrGivenOutOrRedyToGiveOut()
+        public void MerchRequestGiveOutChangesStatusToGivenOut()
         {
             //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(2), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
+            var merchRequest = MerchRequest.Create(new Employee(new Email("test@gmail.com")), MerchPackType.StarterPack,
+                DateTimeOffset.Now, new List<MerchRequest>());
             
             //Act
+            merchRequest.GiveOut(DateTimeOffset.Now);
             
             //Assert
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.Denied));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.GivenOut));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.WaitingSupply));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.ReadyToGiveOut));
-        }
-        
-        [Fact]
-        public void CanNotSetStatusFromProcessingToGivenOut()
-        {
-            //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(2), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
-            merchRequest.SetStatus(Status.Processing);
-            
-            //Act
-            
-            //Assert
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.GivenOut));
-        }
-        
-        [Fact]
-        public void CanNotSetStatusFromGivenOut()
-        {
-            //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(2), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
-            merchRequest.SetStatus(Status.Processing);
-            merchRequest.SetStatus(Status.ReadyToGiveOut);
-            merchRequest.SetStatus(Status.GivenOut);
-            
-            //Act
-            
-            //Assert
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.Denied));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.ReadyToGiveOut));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.WaitingSupply));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.Processing));
-        }
-        
-        [Fact]
-        public void CanNotSetStatusFromDenied()
-        {
-            //Arrange
-            var merchRequest = new MerchRequest(new Employee(new Identifier(2), new Email("test@gmail.com")),
-                new List<MerchItem>(), MerchPackType.NoMerchPack);
-            merchRequest.SetStatus(Status.Processing);
-            merchRequest.SetStatus(Status.ReadyToGiveOut);
-            merchRequest.SetStatus(Status.Denied);
-            
-            //Act
-            
-            //Assert
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.GivenOut));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.ReadyToGiveOut));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.WaitingSupply));
-            Assert.Throws<MerchRequestStatusException>(() => merchRequest.SetStatus(Status.Processing));
+            Assert.Equal(merchRequest.Status, Status.GivenOut);
         }
     }
 }

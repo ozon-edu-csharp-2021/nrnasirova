@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using MerchandiseService.Domain.AggregationModels.ValueObjects;
@@ -19,11 +20,11 @@ namespace MerchandiseService.Domain.AggregationModels.MerchRequestAggregate.Repo
             return itemToUpdate;
         }
 
-        public async Task<List<MerchItem>> FindByEmployeeExternalIdAsync(Identifier externalId, CancellationToken cancellationToken = default)
+        public async Task<List<MerchRequest>> FindByEmployeeEmailAsync(Email email, CancellationToken cancellationToken = default)
         {
-            return new List<MerchItem>
+            return new List<MerchRequest>
             {
-                new (new Sku(1))
+                MerchRequest.Create((new Employee(new Email("test@gmail.com"))), MerchPackType.StarterPack, DateTimeOffset.Now)
             };
         }
     }

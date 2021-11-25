@@ -26,8 +26,6 @@ namespace MerchandiseService.Controllers.V1
             var issueMerchRequestCommand = new IssueMerchRequestCommand()
             {
                 EmployeeEmail = merchItemIssueModel.EmployeeEmail,
-                EmployeeExternalId = merchItemIssueModel.EmployeeId,
-                SkuList = merchItemIssueModel.MerchItems.Select(m => m.Sku).ToList(),
                 MerchPackType = merchItemIssueModel.MerchPackType
             };
             
@@ -35,16 +33,16 @@ namespace MerchandiseService.Controllers.V1
             return Ok(merchRequestCreatedId);
         }
 
-        [HttpPost("getByEmployeeId")]
-        public async Task<IActionResult> GetByEmployeeId(V1MerchByEmployeeId merchByEmployeeId, CancellationToken token)
+        [HttpPost("getByEmployeeEmail")]
+        public async Task<IActionResult> GetByEmployeeEmail(V1MerchByEmployeeEmail merchByEmployeeEmail, CancellationToken token)
         {
-            var merchRequestByEmployeeIdQuery = new GetMerchRequestByEmployeeIdQuery()
+            var merchRequestByEmployeeIdQuery = new GetMerchRequestByEmployeeEmailQuery()
             {
-                EmployeeExternalId = merchByEmployeeId.EmployeeId
+                EmployeeEmail = merchByEmployeeEmail.EmployeeEmail
             };
 
-            var merchItems = await _mediator.Send(merchRequestByEmployeeIdQuery, token);
-            return Ok(merchItems);
+            var merchRequests = await _mediator.Send(merchRequestByEmployeeIdQuery, token);
+            return Ok(merchRequests);
         }
     }
 }

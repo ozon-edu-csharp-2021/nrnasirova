@@ -14,7 +14,7 @@ namespace MerchandiseService.GrpcServices
             throw new NotImplementedException();
         }
 
-        public override async Task<GetMerchByEmployeeIdResponse> GetByEmployeeId(GetMerchByEmployeeIdRequest getMerchByEmployeeIdRequest, ServerCallContext context)
+        public override async Task<GetMerchByEmployeeEmailResponse> GetByEmployeeEmail(GetMerchByEmployeeEmail getMerchByEmployeeIdRequest, ServerCallContext context)
         {
             throw new NotImplementedException();
         }
