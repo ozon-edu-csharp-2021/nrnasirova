@@ -2,10 +2,6 @@
 {
     public class V1MerchItem
     {
-        public long MerchId { get; set; }
-        
-        public string MerchName { get; set; }
-        
-        public int Quantity { get; set; }
+        public long Sku { get; set; }
     }
 }
